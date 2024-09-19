@@ -1,0 +1,88 @@
+a. Introduction
+b. Objectives
+c. Problem Statement
+d. Literature survey
+e. System Architecture/System Design
+
+
+
+
+ABSTRACT
+
+Indian Sign Language (ISL) is a complete language with its own grammar, syntax, vocabulary and several unique linguistic attributes. It is used by over 5 million deaf people in India. Currently, there is no publicly available dataset on ISL to evaluate Sign Language Recognition (SLR) approaches. In this work, we present the Indian Lexicon Sign Language Dataset - INCLUDE - an ISL dataset that contains 0.27 million frames across 4,287 videos over 263 word signs from 15 different word categories. INCLUDE is recorded with the help of experienced signers to provide close resemblance to natural conditions. A subset of 50 word signs is chosen across word categories to define INCLUDE-50 for rapid evaluation of SLR meth- ods with hyperparameter tuning. As the first large scale study of SLR on ISL, we evaluate several deep neural networks combining different methods for augmentation, feature extraction, encoding and decoding. The best performing model achieves an accuracy of 94.5% on the INCLUDE-50 dataset and 85.6% on the INCLUDE dataset. This model uses a pre-trained feature extractor and encoder and only trains a decoder. We further explore generalisation by fine-tuning the decoder for an American Sign Language dataset. On the ASLLVD with 48 classes, our model has an accuracy of 92.1%; improving on existing results and providing an efficient method to support SLR for multiple languages.
+
+In this work, we present the Indian Lexicon Sign Language Dataset - INCLUDE - an ISL dataset that contains 0.27 million frames across 4,287 videos over 263-word signs from 15 different word categories. INCLUDE is recorded with the help of experienced signers to provide close resemblance to natural conditions. As the first large scale study of SLR on ISL, we evaluate several deep neural networks combining different methods for augmentation, feature extraction, encoding and decoding. The best performing model achieves an accuracy of 94.5% on the INCLUDE-50 dataset and 85.6% on the INCLUDE dataset. We further explore generalisation by fine-tuning the decoder for an American Sign Language dataset. On the ASLLVD with 48 classes, our model has an accuracy of 92.1%; improving on existing results and providing an efficient method to support SLR for multiple languages.
+
+
+
+There have been several studies on sign language detection using machine learning techniques in recent years. Some of the key approaches include:
+
+    Computer Vision: Several studies have used computer vision techniques such as convolutional neural networks (CNNs) and deep learning to detect and recognize hand gestures in sign language videos.
+
+    Gesture Recognition: Some researchers have used gesture recognition techniques such as Hidden Markov Models (HMMs) and Dynamic Time Warping (DTW) to detect and recognize signs in sign language videos.
+
+    Multi-modal Approaches: A few studies have used a combination of computer vision and natural language processing techniques to detect and recognize signs in sign language videos.
+
+    Transfer Learning: Some studies have used transfer learning techniques to improve the performance of sign language detection systems.
+
+A few examples of recent research on sign language detection using machine learning include:
+
+    "A Deep Learning Approach for Automatic Sign Language Recognition" by L. S. Saini and R. K. Sharma (2018)
+
+    "Deep Neural Networks for Sign Language Recognition: An Overview" by M. Elakkiya and G. Rajeswari (2018)
+
+    "A Comparative Study of Hand Gesture Recognition Using Machine Learning Techniques" by M. A. Imran, M. A. Imran, and S. A. Khan (2019)
+
+    "A Comparative Study of Hand Gesture Recognition using CNN and HMM" by A. A. S. Al-Ani, M. Al-Nimry, and K. Al-Khatib (2019)
+
+It is worth noting that this is a rapidly evolving field, and new developments and techniques are constantly emerging.
+
+
+
+    "A Deep Learning Approach for Automatic Sign Language Recognition" by L. S. Saini and R. K. Sharma (2018) - This study proposed a deep learning approach for recognizing Indian Sign Language (ISL) using a convolutional neural network (CNN). The authors used a dataset of ISL gestures and achieved an accuracy of 92.5% in recognizing the signs. The study also discussed the challenges in recognizing sign language gestures and the potential for further improvement in sign language recognition systems.
+
+    "Deep Neural Networks for Sign Language Recognition: An Overview" by M. Elakkiya and G. Rajeswari (2018) - This paper provided an overview of the recent developments in deep neural networks for sign language recognition. The authors discussed the different architectures used in sign language recognition systems and the challenges associated with recognizing sign language gestures. They also highlighted the potential of deep learning techniques in improving the performance of sign language recognition systems.
+
+    "A Comparative Study of Hand Gesture Recognition Using Machine Learning Techniques" by M. A. Imran, M. A. Imran, and S. A. Khan (2019) - This study compared the performance of various machine learning algorithms for recognizing hand gestures in sign language videos. The authors used a dataset of American Sign Language (ASL) gestures and evaluated the performance of algorithms such as K-Nearest Neighbors, Decision Trees, and Neural Networks. The study found that the neural network algorithm performed the best, with an accuracy of 96.5%.
+
+    "A Comparative Study of Hand Gesture Recognition using CNN and HMM" by A. A. S. Al-Ani, M. Al-Nimry, and K. Al-Khatib (2019) - This study compared the performance of two different algorithms for recognizing hand gestures in sign language videos: a convolutional neural network (CNN) and a hidden Markov model (HMM). The authors used a dataset of Arabic Sign Language (ArSL) gestures and found that the CNN algorithm performed better than the HMM algorithm, with an accuracy of 93.3% compared to 85.6%.
+
+
+
+
+
+
+
+
+
+
+
+augmentation : center crop , an horizontal flip for trainig the model for both left and right hand , upsample to repeat frames ,
+downsample to get more varitions in data . then we will be using some pipleines like mediapipe which gives pose keypoints from the input dataset .
+
+then we will be doin data pre processing such as grey scalling the images reucing the size , removing noice .
+
+after getting these pose points we will use this co ordinates through a nueral network to train the model .
+
+then we use the trained model for the classification form wwhich we get the output .
+
+
+
+
+mediapipe:
+
+The mediapipe.solutions.hands.Hands() class is a pre-built solution for hand and gesture tracking provided by the MediaPipe Python package. It utilizes the MediaPipe framework to track the position and movement of hands in an image or video.
+
+It is a class that takes the input of an image or video, and then runs the hand tracking pipeline provided by MediaPipe to detect and track hands in the input. It output the hand landmarks, hand poses and other information about the hands.
+
+The mediapipe.solutions.hands.Hands() class takes several optional parameters that can be used to configure the behavior of the hand tracking pipeline:
+
+    static_image_mode: A boolean value that indicates whether the pipeline is operating on a static image or a video. If set to True, the pipeline will only run once on the input image, and it will not try to track hands over time. If set to False, the pipeline will run continuously on a video stream, and it will try to track hands across multiple frames.
+
+    max_num_hands: An integer value that indicates the maximum number of hands that the pipeline should attempt to detect and track in the input. The default value is 2, which means that the pipeline will try to detect and track up to two hands in the input.
+
+    min_detection_confidence: A float value that indicates the minimum confidence level that the pipeline should use when trying to detect hands in the input. The value should be between 0 and 1. The default value is 0.5, which means that the pipeline will only consider detections that have a confidence level of at least 0.5.
+
+    min_tracking_confidence: A float value that indicates the minimum confidence level that the pipeline should use when trying to track hands across multiple frames. The value should be between 0 and 1. The default value is 0.5, which means that the pipeline will only consider tracks that have a confidence level of at least 0.5.
+
+You can adjust these parameters to match the specific requirements of your application. A lower value for the min_detection_confidence and min_tracking_confidence can increase the number of hands detected and tracked, but it can also lead to more false positives. A higher value for these parameters can help to reduce false positives but can also lead to fewer hands being detected and tracked.
